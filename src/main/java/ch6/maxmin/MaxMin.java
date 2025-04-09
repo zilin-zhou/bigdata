@@ -1,10 +1,7 @@
 package ch6.maxmin;
 
-
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -14,61 +11,55 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.IOException;
-import java.util.TreeSet;
 
-public class MaxMin{
+public class MaxMin {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
+        System.setProperty("HADOOP_USER_NAME", "root");
+        conf.set("mapreduce.framework.name", "local");
 
-        System.setProperty("HADOOP_USER_NAME","root");
-        conf.set("mapreduce.framework.name","local");
+        Job job = Job.getInstance(conf, "MR");
+        job.setJarByClass(MaxMin.class);
 
-        Job job = Job.getInstance(conf,"MR");
-
-        //1. 设置Mapper,Reducer
+        // 1. 设置 Mapper 和 Reducer
         job.setMapperClass(MaxMinMapper.class);
         job.setReducerClass(MaxMinReducer.class);
 
-        //2. 设置输出的类型
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        // 2. 修正类型声明
+        job.setMapOutputKeyClass(LongWritable.class);
+        job.setMapOutputValueClass(NullWritable.class);
+        job.setOutputKeyClass(LongWritable.class);
+        job.setOutputValueClass(LongWritable.class);
 
-        FileInputFormat.addInputPath(job,new Path("file:///hadoop/maxmin/in/"));
-        FileOutputFormat.setOutputPath(job,new Path("file:///hadoop/maxmin/out/"));
+        // 3. 输入输出路径
+        FileInputFormat.addInputPath(job, new Path("hdfs://node01:9000/maxmin/input/maxmin.txt"));
+        FileOutputFormat.setOutputPath(job, new Path("hdfs://node01:9000/maxmin/output/"));
 
         job.waitForCompletion(true);
     }
 }
 
-class MaxMinMapper extends Mapper<LongWritable, Text,LongWritable, NullWritable>{
+class MaxMinMapper extends Mapper<LongWritable, Text, LongWritable, NullWritable> {
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String line = value.toString();
-        context.write(new LongWritable(Long.valueOf(line)),NullWritable.get());
+        context.write(new LongWritable(Long.parseLong(line)), NullWritable.get());
     }
 }
 
-class MaxMinReducer extends Reducer<LongWritable,NullWritable,LongWritable,LongWritable>{
-    private TreeSet<LongWritable> result = new TreeSet<LongWritable>();
+class MaxMinReducer extends Reducer<LongWritable, NullWritable, LongWritable, LongWritable> {
+    private long min = Long.MAX_VALUE;
+    private long max = Long.MIN_VALUE;
+
     @Override
-    protected void reduce(LongWritable key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
-        //添加元素到 Result中
-        result.add(key);
-        //如果元素的个数为3，表示第一个为最小值，最后一个为最大值，删除中间的那个即可
-        if(result.size() == 3){
-            Object[] tmp = result.toArray();
-            result.remove(tmp[1]);
-            tmp = null;
-        }
+    protected void reduce(LongWritable key, Iterable<NullWritable> values, Context context) {
+        long num = key.get();
+        if (num < min) min = num;
+        if (num > max) max = num;
     }
 
     @Override
     protected void cleanup(Context context) throws IOException, InterruptedException {
-        LongWritable[] tmp = new LongWritable[2];
-        result.toArray(tmp);
-        //最后才输出最值
-        context.write(tmp[0],tmp[1]);
+        context.write(new LongWritable(min), new LongWritable(max));
     }
 }
