@@ -1,0 +1,8 @@
+Hadoop	Spark	Hadoop	Spark
+Spark	Flume	Spark	Flink
+Hive	Hive
+HBase	Hadoop	Storm	Flume	Kafka
+Kafka
+Storm	Flume	Flink
+Flink	Flume
+Spark	Flume	Kafka
