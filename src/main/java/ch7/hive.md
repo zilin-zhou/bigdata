@@ -1,4 +1,12 @@
 以下操作都在node01上操作
+
+hive  下载地址
+
+```
+https://dlcdn.apache.org/hive/hive-4.0.1/apache-hive-4.0.1-bin.tar.gz
+```
+
+
 1、安装mysql数据库。如果你们有mysql可以跳过此步骤，在哪安装的数据库都行。
 
 ```
@@ -44,7 +52,6 @@ export PATH=$PATH:$HIVE_HOME/bin
 
 source /etc/profile  //环境变量生效
 ```
-
 
 4、修改hive-site.xml配置文件
 
