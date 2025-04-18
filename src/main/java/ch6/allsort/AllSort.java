@@ -35,8 +35,8 @@ public class AllSort {
         job.setOutputValueClass(NullWritable.class);
 
 
-        FileInputFormat.addInputPath(job,new Path("file:///hadoop/allsort/in/"));
-        FileOutputFormat.setOutputPath(job,new Path("file:///hadoop/allsort/out/"));
+        FileInputFormat.addInputPath(job,new Path("hdfs://node01:9000/allsort/input/allsort.txt"));
+        FileOutputFormat.setOutputPath(job,new Path("hdfs://node01:9000/allsort/output"));
 
         job.waitForCompletion(true);
 
