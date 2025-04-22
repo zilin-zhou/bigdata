@@ -24,7 +24,7 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
 
 3、加载表.
 
-    **3.1 location //本地加载到数据库**
+**3.1 location //本地加载到数据库**
 
 ```
 LOAD DATA LOCAL INPATH '/opt/student-type.csv' 
@@ -37,7 +37,6 @@ select * from student limit 10;
 select count(*) from student;
 
 ```
-
 
 **3.2 从HDFS加载数据**
 
@@ -70,6 +69,9 @@ INSERT INTO TABLE student
     course,math+5, reading+5, writing+5
     FROM student 
     WHERE parental_level="new record";
+
+// 计算
+SELECT AVG(math) FROM student;
 
 
 ```
