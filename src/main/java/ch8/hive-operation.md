@@ -55,6 +55,7 @@ OVERWRITE INTO TABLE student;
 4、插入数据
 
 ```
+
 INSERT INTO student 
 VALUES
 ('female','group A',"new record",'standard','none',60,60,60),
@@ -73,5 +74,18 @@ INSERT INTO TABLE student
 // 计算
 SELECT AVG(math) FROM student;
 
+// 实验三命令
+//建表
+create table students(name string, clazz string, sid string,
+gender string, birthday Date, phone bigint, loc string, score int)
+row format delimited
+fields terminated by '\t'
+lines terminated by '\n'
+stored as textfile;
+
+任务一：select gender,count(*) from students group by gender;
+任务二： select distinct substr(name,0,1) from students;
+任务三：select max(score),min(score) from students;
+任务四： select avg(score) from students;
 
 ```

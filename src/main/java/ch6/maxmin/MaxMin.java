@@ -63,3 +63,5 @@ class MaxMinReducer extends Reducer<LongWritable, NullWritable, LongWritable, Lo
         context.write(new LongWritable(min), new LongWritable(max));
     }
 }
+
+
