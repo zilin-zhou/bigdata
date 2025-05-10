@@ -84,8 +84,8 @@ lines terminated by '\n'
 stored as textfile;
 
 任务一：select gender,count(*) from students group by gender;
-任务二： select distinct substr(name,0,1) from students;
+任务二：select distinct substr(name,0,1) from students;
 任务三：select max(score),min(score) from students;
-任务四： select avg(score) from students;
+任务四：select avg(score) from students;
 
 ```
