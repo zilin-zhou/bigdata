@@ -49,7 +49,7 @@ vim zoo.cfg
 server.1=node01:2888:3888
 server.2=node02:2888:3888
 server.3=node03:2888:3888
-dataDir=/opt/data/zookeeper   //这个时zookeeper数据文件目录，需要自己创建。哪里创建都行。三台主机尽量保持一样。
+dataDir=/opt/data/zookeeper   //这个时zookeeper数据文件目录，需要自己创建。三台主机都要创建。
 
 //复制到主机node02 和node03
 scp /opt/apps/apache-zookeeper-3.8.4-bin node02:/opt/apps/
@@ -72,7 +72,7 @@ zkServer.sh status
 **四、配置hbase**
 
 ```
-vim /opt/apps/hbase-2.6.2/conf/regionserversvim /opt/apps/hbase-2.6.2/conf/regionservers//修改配置文件
+//修改配置文件
 vim /opt/apps/hbase-2.6.2/conf/hbase-site.xml
 
 //追加下面内容
