@@ -2,7 +2,7 @@
 
 ```
 //hbase 下载地址
-https://dlcdn.apache.org/hbase/2.6.2/hbase-2.6.2-src.tar.gz
+https://dlcdn.apache.org/hbase/2.6.2/hbase-2.6.2-bin.tar.gz
 // zookeeper 下载地址
 https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
 
