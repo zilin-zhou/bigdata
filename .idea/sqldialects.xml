@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$USER_HOME$/Desktop/广州/hadoop资料代码/源代码-第二篇8-10章/第10章/car.sql" dialect="HiveQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ch10/car.sql" dialect="HiveQL" />
+  </component>
+</project>
