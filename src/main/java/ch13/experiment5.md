@@ -1,9 +1,9 @@
-**实验4命令**
-```
+**实验5命令**
+```bash
 create "students","data"
 
 ```
-```
+```bash
 get "students","RB0000001","data:birthday"
 scan "students",{COLUMNS=>"data:birthday",LIMIT=>10}
 scan "students",{COLUMNS=>["data:birthday","data:name"],LIMIT=>10}
@@ -12,7 +12,7 @@ scan "students",{COLUMNS=>"data:name:toString",LIMIT=>10}
 ```
 **过滤器**
 
-```
+```bash
 [//]: # (列簇过滤器)
 scan "students",FILTER=>"FamilyFilter(=,'binary:data')",LIMIT=>1 
 
@@ -30,7 +30,7 @@ scan "students",FILTER=>"ColumnCountGetFilter(3)"
 ```
 **任务一：计数，男女生总人数**
 
-```
+```bash
 [//]: # (任务一Shell实现)
 count "students",{FILTER=>"ValueFilter(=,'binary:男')"}
 count "students",{FILTER=>"ValueFilter(=,'binary:女')"}

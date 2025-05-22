@@ -75,6 +75,4 @@ public class CH13MRStudentsAge {
             context.write(new ImmutableBytesWritable(key.getBytes()), put);
         }
     }
-
-
 }
