@@ -1,6 +1,8 @@
 show databases ;
 create database cars;
 
+
+
 use cars;
 CREATE TABLE car_data(
                          Name STRING,

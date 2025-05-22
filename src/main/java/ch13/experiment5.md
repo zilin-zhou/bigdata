@@ -1,5 +1,8 @@
 **实验4命令**
+```
+create "students","data"
 
+```
 ```
 get "students","RB0000001","data:birthday"
 scan "students",{COLUMNS=>"data:birthday",LIMIT=>10}
@@ -28,8 +31,13 @@ scan "students",FILTER=>"ColumnCountGetFilter(3)"
 **任务一：计数，男女生总人数**
 
 ```
-[//]: # (Shell实现)
+[//]: # (任务一Shell实现)
 count "students",{FILTER=>"ValueFilter(=,'binary:男')"}
 count "students",{FILTER=>"ValueFilter(=,'binary:女')"}
 
 ```
+任务二三四只能用API实现
+
+**任务二：去重，求学生出现的所有姓氏**
+**任务三：求最值，求最高分和最低分**
+**任务四：均值，求分数的平均值**
